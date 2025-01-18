@@ -19,5 +19,5 @@ $breakpoints: (
 }
 
 @function responsive-clamp($min-size, $max-size) {
-  @return clamp(#{$min-size}px, calc(#{$min-size}px + (#{$max-size} - #{$min-size}) * ((100vw - 320px) / (1366 - 320))), #{$max-size}px);
+  @return clamp(#{$min-size}px, calc(#{$min-size}px + (#{$max-size} - #{$min-size}) * ((100vw - 320px) / (1200))), #{$max-size}px);
 }
