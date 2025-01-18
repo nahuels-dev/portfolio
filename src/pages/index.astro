@@ -1,8 +1,44 @@
 ---
-import Layout from '../layouts/Layout.astro';
-
+import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout>
 	<h1>Astro app</h1>
 </Layout>
+<style lang="scss" is:global>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	
+	main {
+		overflow: hidden;
+	}
+
+	body {
+		width: 100%;
+		overflow-x: hidden;
+		background-color: $dark-violet;
+		font-family: $main-font;
+	}
+
+	.container {
+		width: 95%;
+		max-width: 1200px;
+		margin: auto;
+		position: relative;
+	}
+
+	.function {
+		display: block;
+		width: max-content;
+		font-size: 20px;
+		font-weight: 500;
+		color: $function_text;
+	}
+
+	.yellow {
+		color: $yellow_text;
+	}
+</style>
