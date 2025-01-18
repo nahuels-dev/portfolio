@@ -1,6 +1,7 @@
 ---
 import Button from "./Button.astro";
 import MainContainer from "./MainContainer.astro";
+
 ---
 
 <section class="hero">
@@ -29,6 +30,14 @@ import MainContainer from "./MainContainer.astro";
     </div>
   </MainContainer>
 </section>
+
+<script>
+  import lenis from '@/lib/lenis';
+  const projectArrow = document.querySelector('.hero__container__projects')
+    projectArrow!.addEventListener('click', ()=> {
+      lenis.scrollTo('#works')
+    })
+</script>
 
 <style lang="scss" is:global>
   .hero {
