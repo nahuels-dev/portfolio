@@ -33,6 +33,7 @@ const handleClickString = handleClick ? String(handleClick) : "";
   )
 }
 <script define:vars={{ handleClickString, id }} is:raw>
+  
   const button = document.querySelector(`[data-id="${id}"]`);
 
   if (button) {
