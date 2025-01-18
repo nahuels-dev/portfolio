@@ -1,0 +1,67 @@
+---
+export interface Props {
+  label: string;
+  handleClick?: () => void;
+  href?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top"; //
+  className?: string;
+}
+
+const id = crypto.randomUUID();
+const {
+  label,
+  handleClick,
+  href,
+  target = "_self",
+  className = "",
+} = Astro.props;
+
+const isLink = !!href;
+
+const handleClickString = handleClick ? String(handleClick) : "";
+---
+
+{
+  isLink ? (
+    <a href={href} class:list={["button", className]} target={target}>
+      {label}
+    </a>
+  ) : (
+    <button class:list={["button", className]} data-id={id}>
+      {label}
+    </button>
+  )
+}
+<script define:vars={{ handleClickString, id }} is:raw>
+  const button = document.querySelector(`[data-id="${id}"]`);
+
+  if (button) {
+    const handleClick = eval(`(${handleClickString})`);
+    button.addEventListener("click", handleClick);
+  }
+</script>
+
+<style lang="scss">
+  .button {
+    background-color: $main_violet;
+    width: 160px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s;
+    font-family: $main-font;
+    cursor: pointer;
+    user-select: none;
+    color: $white;
+    text-decoration: none;
+    margin-bottom: 17px;
+    margin-left: 30px;
+    &:hover {
+      box-shadow: 0px -5px 0px #5d3ac0 inset;
+    }
+  }
+</style>
