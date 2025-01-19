@@ -1,0 +1,93 @@
+---
+import about_image from "@/assets/images/code.png";
+import Image from "astro/components/Image.astro";
+import MainContainer from "./MainContainer.astro";
+import Button from "./Button.astro";
+const getAge = (birth:any)=>{
+        var birthParts = birth.split('/');
+        var birthDate = new Date(birthParts[2], birthParts[1] - 1, birthParts[0]);
+        var now = new Date();
+        
+        var yearDiff = now.getFullYear() - birthDate.getFullYear();
+        if (now.getMonth() < birthDate.getMonth() || 
+            (now.getMonth() === birthDate.getMonth() && now.getDate() < birthDate.getDate())) {
+            yearDiff--;
+        }
+        return yearDiff;
+    }
+---
+
+<section class="about" id="about">
+  <MainContainer class="about__container">
+    <div class="about__container__text">
+      <span class="function">&lt;&gt;</span>
+      <p>
+        ¡Hola! Mi nombre es Nahuel Silva y tengo {getAge("12/03/2001")} años. Actualmente me desempeño
+        como desarrollador web frontend en una multinacional, aunque siempre estoy
+        abierto a nuevas oportunidades laborales.
+      </p>
+      <p>
+        Me considero una persona proactiva y entusiasta por aprender sobre nuevas
+        tecnologías y profundizar en su funcionamiento. Me encanta ser autodidacta
+        y aplicar todo lo que aprendo en la práctica. En cada aplicación que
+        desarrollo, mi objetivo es lograr el mejor rendimiento posible en todas
+        las plataformas.
+      </p>
+      <p>
+        Estoy comprometido con brindar soluciones creativas y eficientes a los
+        desafíos que se presentan en mi trabajo. Me apasiona trabajar en equipo y
+        colaborar para alcanzar los objetivos planteados. ¡Si tienes alguna
+        propuesta interesante, no dudes en <a href="mailto:hola@nahuel-s.dev?Subject=Tenemos%20una%20propuesta%20para%20ti&Body=Hola%20Nahuel,%20nos%20intereso%20tu%20perfil%20y%20queremos...">contactarme</a>!
+      </p>
+      <Button label="Descargar CV" href="/Nahuel_Silva.pdf" target="_blank"/>
+      <span class="function">&lt;/&gt;</span>
+    </div>
+    <div class="about__container__image">
+      <Image src={about_image} alt={""} />
+    </div>
+  </MainContainer>
+</section>
+<style lang="scss" is:global>
+  .about {
+    background: $dark-violet;
+    background: linear-gradient(to bottom, $dark-violet 50%, $dark-background 100%);
+
+    &__container {
+      display: flex;
+
+      &__image {
+        position: absolute;
+        top: 0;
+        right: -10%;
+        width: 80%;
+        height: auto;
+        top: 50%;
+        transform: translateY(-50%);
+        mix-blend-mode: soft-light;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      &__text{
+        color: $white;
+        width: 70%;
+
+        @include respond-to("medium-large"){
+          width: 100%;
+        }
+
+        p{
+          font-size: responsive-clamp(20,24);
+          margin-left: 30px;
+          margin-bottom: 20px;
+        }
+
+        a{
+                color: $yellow_text;
+        }
+      }
+    }
+  }
+</style>

@@ -5,6 +5,7 @@ export interface Props {
   href?: string;
   target?: "_blank" | "_self" | "_parent" | "_top"; //
   className?: string;
+  scrollTo?:string
 }
 
 const id = crypto.randomUUID();
@@ -14,6 +15,7 @@ const {
   href,
   target = "_self",
   className = "",
+  scrollTo,
 } = Astro.props;
 
 const isLink = !!href;
@@ -27,7 +29,7 @@ const handleClickString = handleClick ? String(handleClick) : "";
       {label}
     </a>
   ) : (
-    <button class:list={["button", className]} data-id={id}>
+    <button class:list={["button", className]} data-id={id} scroll-to={scrollTo}>
       {label}
     </button>
   )
