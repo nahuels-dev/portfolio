@@ -1,0 +1,95 @@
+---
+import MainContainer from "./MainContainer.astro";
+---
+
+<section class="my-values">
+  <MainContainer>
+    <p class="my-values__text">
+      La innovación, la atención al detalle y el compromiso con la excelencia
+      son mis pilares. Me esfuerzo por superar expectativas, creando
+      experiencias digitales significativas. La colaboración y la mejora
+      continua guían cada proyecto que emprendo.
+    </p>
+  </MainContainer>
+</section>
+
+<script>
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+  import { TextSplitter } from '@/lib/splitText';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const textSplitter = new TextSplitter('my-values__text')
+  textSplitter.splitTextAndUpdateHTML()
+  const words = textSplitter.createHTMLArrayFromDOM()
+
+  gsap.from(words, {
+  opacity: 0,
+  x: (i, target) => {
+    const rect = target.getBoundingClientRect();
+    return rect.left < window.innerWidth / 2
+      ? -400 + Math.random() * 400
+      : 400 + Math.random() * 400;
+  },
+  y: (i, target) => {
+  const container = document.querySelector<HTMLElement>('.my-values')
+  const containerRect = container!.getBoundingClientRect()
+  const rect = target.getBoundingClientRect()
+  const offset = (rect.top + rect.height / 2) - (containerRect.top + containerRect.height / 2)
+
+  return offset < 0
+    ? -200 - Math.random() * Math.abs(offset / containerRect.height) * 300
+    : 200 + Math.random() * Math.abs(offset / containerRect.height) * 300;
+},
+  scale: () => 1.5 + Math.random() * 0.5,
+  transform: "scale(1.5)",
+  rotateX: () => Math.random() * -80 - 30,
+  rotateZ: () => Math.random() * 6 - 3,
+  filter: 'blur(3px)',
+  display: 'inline-block',
+  willChange: 'transform',
+  ease: 'power2.out',
+  stagger: {
+    amount: 2,
+    from: 'random',
+  },
+  duration: 4,
+  scrollTrigger: {
+    trigger: '.my-values',
+    start: 'top top',
+    scrub: true,
+    pin: true,
+    end: () => `+=${words[words.length - 1].getBoundingClientRect().bottom}`,
+  },
+})
+
+
+
+</script>
+
+<style lang="scss">
+  .my-values {
+    margin-top: 100px;
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    position: relative;
+    padding: 50px;
+    width: 100%;
+
+    @include respond-to("medium-large"){
+      padding: 0;
+    }
+    
+    &__text {
+      width: 100%;
+      font-size: responsive-clamp(25,50);
+      text-wrap: balance;
+      text-align: center;
+      font-family: $main-font;
+      color: $white;
+      font-weight: 100;
+    }
+  }
+</style>
