@@ -1,23 +1,139 @@
 ---
-import about_image from "@/assets/images/code.png";
+import about_image from "@/assets/images/about.png";
 import Image from "astro/components/Image.astro";
 import MainContainer from "./MainContainer.astro";
 import Button from "./Button.astro";
-const getAge = (birth:any)=>{
-        var birthParts = birth.split('/');
-        var birthDate = new Date(birthParts[2], birthParts[1] - 1, birthParts[0]);
-        var now = new Date();
-        
-        var yearDiff = now.getFullYear() - birthDate.getFullYear();
-        if (now.getMonth() < birthDate.getMonth() || 
-            (now.getMonth() === birthDate.getMonth() && now.getDate() < birthDate.getDate())) {
-            yearDiff--;
-        }
-        return yearDiff;
-    }
+const getAge = (birth: any) => {
+  var birthParts = birth.split("/");
+  var birthDate = new Date(birthParts[2], birthParts[1] - 1, birthParts[0]);
+  var now = new Date();
+
+  var yearDiff = now.getFullYear() - birthDate.getFullYear();
+  if (
+    now.getMonth() < birthDate.getMonth() ||
+    (now.getMonth() === birthDate.getMonth() &&
+      now.getDate() < birthDate.getDate())
+  ) {
+    yearDiff--;
+  }
+  return yearDiff;
+};
 ---
 
 <section class="about" id="about">
+  <MainContainer class="about__container">
+    <div class="about__container__image">
+      
+      <Image src={about_image} alt={""} />
+    </div>
+    <div class="about__container__text">
+      <p>
+        Soy Nahuel Silva, desarrollador web frontend apasionado por la
+        tecnología desde los 13 años, cuando descubrí el desarrollo web en un
+        taller de HTML. Desde entonces, me he formado de manera autodidacta para
+        perfeccionar mis habilidades. Actualmente soy frontend lead en una
+        multinacional, donde gestiono un equipo de desarrolladores, asegurando
+        calidad y puntualidad en cada proyecto.
+      </p>
+      <p>
+        <a href="/Nahuel_Silva.pdf" target="_blank">&lt;Descarga mi CV aquí/&gt;</a> para conocer más sobre
+        mi experiencia y habilidades.
+      </p>
+    </div>
+  </MainContainer>
+</section>
+
+<script>
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger)
+  gsap.fromTo(
+        '.about__container__image',
+        { opacity: 0, y: "40%" },
+        {
+          opacity: 1,
+          y: "0%",
+          scrollTrigger: {
+            trigger: '.about',
+            start: "top 80%",
+            end: "top 20%",
+            scrub: 1,
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+  gsap.fromTo(
+        '.about__container__image img',
+        { opacity: 0, y: "-20%" },
+        {
+          opacity: 1,
+          y: "0%",
+          scrollTrigger: {
+            trigger: '.about',
+            start: "top 80%",
+            end: "top 20%",
+            scrub: 1,
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+</script>
+
+<style is:global lang="scss">
+  .about {
+    width: 100%;
+    position: relative;
+    margin-top: 200px;
+
+    &__container {
+      display: flex;
+      justify-content: flex-start;
+      gap: 60px;
+      align-items: flex-end;
+      @include respond-to("small"){
+        flex-wrap: wrap;
+        gap: 30px;
+      }
+
+      &__image {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 30px;
+        overflow: hidden;
+        aspect-ratio: 1;
+
+        & > img {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      &__text {
+        color: $white;
+        font-family: $main-font;
+        font-weight: 100;
+        font-size: responsive-clamp(16, 20);
+        width: 60%;
+
+        @include respond-to("small"){
+          width: 100%;
+        }
+
+        p {
+          margin: 1rem 0;
+        }
+
+        a {
+          color: $yellow-text;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+</style>
+
+<!-- <section class="about" id="about">
   <MainContainer class="about__container">
     <div class="about__container__text">
       <span class="function">&lt;&gt;</span>
@@ -46,8 +162,8 @@ const getAge = (birth:any)=>{
       <Image src={about_image} alt={""} />
     </div>
   </MainContainer>
-</section>
-<style lang="scss" is:global>
+</section> -->
+<!-- <style lang="scss" is:global>
   .about {
     background: $dark-violet;
     background: linear-gradient(to bottom, $dark-violet 50%, $dark-background 100%);
@@ -90,4 +206,4 @@ const getAge = (birth:any)=>{
       }
     }
   }
-</style>
+</style> -->

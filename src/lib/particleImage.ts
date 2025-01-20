@@ -58,7 +58,7 @@ export class ParticleCanvas {
       particleSize = 4,
       particleGap = 1,
       isBW = false,
-      radiusEffect = 6
+      radiusEffect = 3
   ) {
       this.canvas = canvas;
       this.context = canvas.getContext('2d', { willReadFrequently: true })!;
