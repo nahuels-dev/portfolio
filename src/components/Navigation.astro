@@ -1,0 +1,146 @@
+---
+import MainContainer from "./MainContainer.astro";
+---
+
+<header class="header">
+  <MainContainer class="header__container">
+    <div class="header__container__logo" scroll-to="#index">
+      <svg width="29" height="60" viewBox="0 0 29 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M27.5 5.62913L15.0983 27.2471L27.5 44.8182L27.5 5.62913Z" stroke="#8155FF" stroke-width="3"></path><path d="M1.5 15.62913L13.9017 37.2471L1.5 54.8182L1.5 15.62913Z" stroke="#8155FF" stroke-width="3" fill="none" /></svg>
+    </div>
+
+    <button class="header__container__togglebtn">
+      <span class="header__container__togglebtn__dot"></span>
+      <span class="header__container__togglebtn__dot"></span>
+      <span class="header__container__togglebtn__dot"></span>
+      <span class="header__container__togglebtn__dot"></span>
+    </button>
+
+    <nav class="header__container__nav">
+      <ul class="header__container__nav__list">
+        <li class="header__container__nav__list__item" scroll-to="#works">&lt;Proyectos /&gt;</li>
+        <li class="header__container__nav__list__item" scroll-to="#about">&lt;Sobre mi /&gt;</li>
+        <li class="header__container__nav__list__item" scroll-to="#contact">&lt;Contacto /&gt;</li>
+      </ul>
+    </nav>
+  </MainContainer>
+</header>
+<script>
+  const toggleBtn = document.querySelector<HTMLButtonElement>(".header__container__togglebtn")
+  const nav = document.querySelector<HTMLElement>(".header__container__nav")
+
+  if (toggleBtn && nav) {
+    toggleBtn.addEventListener("click", () => {
+      toggleBtn.classList.toggle("header__container__togglebtn__open")
+      nav.classList.toggle("header__container__nav__open")
+    });
+  } else {
+    console.error("Toggle button or navigation element not found.")
+  }
+
+
+
+</script>
+<style lang="scss" is:global>
+  .header {
+    position: fixed;
+    z-index: 4;
+    transition: 0.4s;
+    width: 100%;
+    top: 20px;
+
+    &__container {
+      background-color: rgba($color: $dark-background, $alpha: 0.5);
+      backdrop-filter: blur(10px);
+      padding: 0 20px;
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+
+      &__logo{
+        display: grid;
+        padding: 2px 0;
+      }
+
+      &__togglebtn {
+        transition: 0.4s;
+        background-color: transparent;
+        border: none;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 11px;
+        display: none;
+
+        @include respond-to("medium-large") {
+          display: grid;
+        }
+
+        &__open {
+          transform: rotate(45deg);
+          gap: 8px;
+        }
+
+        &__dot {
+          display: block;
+          width: 7px;
+          height: 7px;
+          background-color: $main_violet;
+          border-radius: 50%;
+        }
+      }
+
+      &__nav {
+        @include respond-to("medium-large") {
+          width: 100%;
+          max-height: 0;
+          overflow: hidden;
+          transition: 0.3s;
+        }
+
+        &__open {
+          max-height: 300px;
+        }
+
+        &__list {
+          display: flex;
+          list-style: none;
+          gap: 25px;
+          @include respond-to("medium-large") {
+            height: 300px;
+            top: 100%;
+            width: 100%;
+            left: 0;
+            display: grid;
+            place-content: center;
+            transition: 0.5s;
+          }
+          &__item {
+            position: relative;
+            color: $gray;
+            cursor: pointer;
+            transition: 0.4s;
+            &::after {
+              content: "";
+              position: absolute;
+              height: 3px;
+              border-radius: 3px;
+              width: 0;
+              background-color: $main_violet;
+              bottom: -4px;
+              left: 0;
+              transition: 0.3s;
+            }
+
+            &:hover {
+              color: #ffffff;
+
+              &::after {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+</style>

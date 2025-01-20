@@ -1,0 +1,146 @@
+---
+import Button from "./Button.astro";
+import MainContainer from "./MainContainer.astro";
+
+---
+
+<section class="hero" id="index">
+  <div class="hero__glow"></div>
+  <MainContainer class="hero__container">
+    <div class="hero__container__text">
+      <p class="function">Presentación&#40;&#41;&#123;</p>
+        <h1>
+          Desarrollo sitios y aplicaciones web adaptables y <span class="yellow">responsivas</span>. Me enfoco en crear soluciones <span class="yellow">atractivas</span> y
+          <span class="yellow">fáciles de usar</span>.
+        </h1>
+        <Button label="&lt;Sobre mi /&gt;" handleClick={()=> null} scrollTo="#about"/>
+      <p class="function">&#125;</p>
+    </div>
+
+    <div class="hero__container__projects" scroll-to="#works">
+      <p>&lt;Proyectos /&gt;</p>
+      <svg class="hero__container__projects__arrow" width="16" height="51" viewBox="0 0 16 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 1C9 0.447715 8.55228 0 8 0C7.44772 0 7 0.447715 7 1L9 1ZM7.29289 50.7071C7.68342 51.0976 8.31658 51.0976 8.70711 50.7071L15.0711 44.3431C15.4616 43.9526 15.4616 43.3195 15.0711 42.9289C14.6805 42.5384 14.0474 42.5384 13.6569 42.9289L8 48.5858L2.34315 42.9289C1.95262 42.5384 1.31946 42.5384 0.928932 42.9289C0.538408 43.3195 0.538408 43.9526 0.928932 44.3431L7.29289 50.7071ZM7 1L7 50H9L9 1L7 1Z" fill="#8155FF"/>
+    </svg>
+    </div>
+
+    <div class="hero__container__scroll">
+      <span>scroll</span>
+      <div class="hero__container__scroll__line"></div>
+    </div>
+    <canvas id="canvas"></ca>
+  </MainContainer>
+</section>
+
+<script>
+  import { ParticleCanvas } from '@/lib/particleImage';
+
+  const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+  const particleCanvas = new ParticleCanvas(canvas, '/profile.png');
+
+</script>
+
+<style lang="scss" is:global>
+  .hero {
+    width: 100%;
+    background: rgb(16, 18, 32);
+    background: linear-gradient(
+      180deg,
+      rgba(16, 18, 32, 1) 40%,
+      rgba(29, 32, 48, 1) 100%
+    );
+    position: relative;
+    color: $white;
+    &__glow {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background-color: rgba($color: $main_violet, $alpha: 0.2);
+      filter: blur(150px);
+    }
+
+    &__container {
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      &__text {
+        width: 70%;
+        & > h1 {
+          font-size: responsive-clamp(25, 30);
+          margin: 17px 0 17px 30px;
+        }
+
+        @include respond-to("medium-large"){
+          width: 100%;
+        }
+      }
+
+      &__projects {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: max-content;
+        margin: auto;
+        text-align: center;
+        z-index: 1;
+        cursor: pointer;
+
+        &__arrow {
+          margin: auto;
+        }
+      }
+
+      &__scroll {
+        position: absolute;
+        bottom: 39px;
+        right: -40px;
+        transform: rotate(90deg);
+        display: flex;
+        align-items: center;
+
+        &__line {
+          width: 50px;
+          height: 1px;
+          border-radius: 1px;
+          background-color: #ffffff;
+        }
+      }
+    }
+
+    @include respond-to("medium-large"){
+      padding-top: 100px;
+    }
+  }
+
+  #canvas{
+    width: 700px;
+    position: absolute;
+    right: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    @media (width <= 700px){
+      width: 400px;
+    }
+    @media (width <= 1090px){
+      right: -200px;
+    }
+    @media (width <= 880px){
+      transform: translateY(-50px);
+      top: 0;
+      position: relative;
+      order: 2;
+      margin: auto;
+      z-index: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+</style>

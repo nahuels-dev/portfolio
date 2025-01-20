@@ -1,0 +1,58 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import Works from "@/components/Works.astro";
+import MyValues from "@/components/MyValues.astro";
+import AboutMe from "@/components/AboutMe.astro";
+---
+
+<Layout>
+	<Hero />
+	<Works />
+	<AboutMe />
+	<MyValues />
+</Layout>
+<style lang="scss" is:global>
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	
+	main {
+		overflow: hidden;
+	}
+
+	html{
+		width: 100%;
+		overflow-x: hidden;
+	}
+
+	body {
+		width: 100%;
+		overflow-x: hidden;
+		position: relative;
+		background-color: $dark-violet;
+		font-family: $main-font;
+	}
+
+	.container {
+		width: 95%;
+		max-width: 1200px;
+		margin: auto;
+		position: relative;
+	}
+
+	.function {
+		display: block;
+		width: max-content;
+		font-size: 20px;
+		font-weight: 500;
+		color: $function_text;
+	}
+
+	.yellow {
+		color: $yellow_text;
+	}
+</style>

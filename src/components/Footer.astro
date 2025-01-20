@@ -1,0 +1,68 @@
+---
+import MainContainer from "./MainContainer.astro"
+import codepen from '@/assets/images/icons/logo-codepen.svg'
+import github from '@/assets/images/icons/logo-github.svg'
+import linkedin from '@/assets/images/icons/logo-linkedin.svg'
+import mail from '@/assets/images/icons/mail.svg'
+import Image from "astro/components/Image.astro"
+---
+<footer class="footer" id="contact">
+  <MainContainer>
+    <a class="yellow" href="mailto:nahuel.silva008@gmail.com?Subject=Tenemos%20una%20propuesta%20para%20ti&Body=Hola%20Nahuel,%20nos%20intereso%20tu%20perfil%20y%20queremos...">mail&#40;&#41;;</a>
+
+    <ul class="footer__social">
+      <li><a href="https://www.linkedin.com/in/nahuel--silva/" target="_blank">
+        <Image
+            src={linkedin}
+            alt='linkedin logo'
+        />
+    </a></li>
+    <li><a href="https://github.com/nahuels-dev" target="_blank">
+        <Image
+            src={github}
+            alt='github logo'
+        />
+    </a></li>
+    <li><a href="mailto:nahuel.silva008@gmail.com?Subject=Tenemos%20una%20propuesta%20para%20ti&Body=Hola%20Nahuel,%20nos%20intereso%20tu%20perfil%20y%20queremos...">
+        <Image
+            src={mail}
+            alt='mail logo'
+        />
+    </a></li>
+    <li><a href="https://codepen.io/nahuel_s" target="_blank">
+        <Image
+            src={codepen}
+            alt='codepen logo'
+        />
+    </a></li>
+    </ul>
+  </MainContainer>
+</footer>
+
+<style lang="scss">
+.footer{
+    background: $dark-violet;
+    background: linear-gradient(to bottom, $dark-violet 50%, $dark-background 100%);
+    padding: 150px 0 50px;
+    overflow: hidden;
+    position: relative;
+    font-family: $main-font;
+    
+    a{
+        text-decoration: none;
+        z-index: 1;
+        position: relative;
+    }
+
+    &__social{
+        list-style: none;
+        display: flex;
+        color: #FFFFFF;
+        z-index: 1;
+        position: relative;
+        li{
+            margin: 20px 13px;
+        }
+    }
+}
+</style>

@@ -1,0 +1,94 @@
+name: Deploy Astro to DigitalOcean
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      DROPLET_IP: ${{ secrets.DROPLET_IP }}
+      DROPLET_USER: ${{ secrets.DROPLET_USER }}
+      DROPLET_KEY: ${{ secrets.DROPLET_KEY }}
+      DROPLET_PATH: ${{ secrets.DROPLET_PATH }}
+      CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+      CONTENTFUL_DELIVERY_TOKEN: ${{ secrets.CONTENTFUL_DELIVERY_TOKEN }}
+      CONTENTFUL_PREVIEW_TOKEN: ${{ secrets.CONTENTFUL_PREVIEW_TOKEN }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.17.0'
+
+      - name: Upgrade npm
+        run: npm install -g npm@10
+
+      - name: Create .env file
+        run: |
+          echo "CONTENTFUL_SPACE_ID=${{ env.CONTENTFUL_SPACE_ID }}" >> .env
+          echo "CONTENTFUL_DELIVERY_TOKEN=${{ env.CONTENTFUL_DELIVERY_TOKEN }}" >> .env
+          echo "CONTENTFUL_PREVIEW_TOKEN=${{ env.CONTENTFUL_PREVIEW_TOKEN }}" >> .env
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Astro project
+        run: npm run build
+
+      - name: Set up known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          touch ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.DROPLET_IP }} >> ~/.ssh/known_hosts
+
+      - name: Upload build to Droplet
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: ${{ secrets.DROPLET_USER }}
+          port: 22
+          key: ${{ secrets.DROPLET_KEY }}
+          source: "dist/*"
+          target: "${{ secrets.DROPLET_PATH }}"
+
+      - name: Upload .env to Droplet
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: ${{ secrets.DROPLET_USER }}
+          port: 22
+          key: ${{ secrets.DROPLET_KEY }}
+          source: ".env"
+          target: "${{ secrets.DROPLET_PATH }}"
+
+      - name: Upload package.json to Droplet
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: ${{ secrets.DROPLET_USER }}
+          port: 22
+          key: ${{ secrets.DROPLET_KEY }}
+          source: "package.json"
+          target: "${{ secrets.DROPLET_PATH }}"
+
+      - name: Restart SSR with PM2
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.DROPLET_KEY }}
+          port: 22
+          script: |
+            cd ${{ secrets.DROPLET_PATH }}
+            npm install
+            pm2 stop nahuel-s-dev || true
+            pm2 start dist/server/entry.js --interpreter=/root/.nvm/v20.17.0/bin/node --name nahuel-s-dev
+            pm2 save
