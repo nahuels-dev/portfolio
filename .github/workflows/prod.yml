@@ -30,20 +30,11 @@ jobs:
       - name: Upgrade npm
         run: npm install -g npm@10
 
-      - name: Create .env file
-        run: |
-          echo "CONTENTFUL_SPACE_ID=${{ env.CONTENTFUL_SPACE_ID }}" >> .env
-          echo "CONTENTFUL_DELIVERY_TOKEN=${{ env.CONTENTFUL_DELIVERY_TOKEN }}" >> .env
-          echo "CONTENTFUL_PREVIEW_TOKEN=${{ env.CONTENTFUL_PREVIEW_TOKEN }}" >> .env
-
       - name: Install dependencies
         run: npm install
 
       - name: Build Astro project with runtime variables
         run: |
-          CONTENTFUL_SPACE_ID=${{ secrets.CONTENTFUL_SPACE_ID }} \
-          CONTENTFUL_DELIVERY_TOKEN=${{ secrets.CONTENTFUL_DELIVERY_TOKEN }} \
-          CONTENTFUL_PREVIEW_TOKEN=${{ secrets.CONTENTFUL_PREVIEW_TOKEN }} \
           npx astro build
 
       - name: Set up known_hosts
@@ -85,6 +76,6 @@ jobs:
             nvm use 20.17.0
             npm install
             pm2 stop nahuel-s-dev || true
-            pm2 start ecosystem.config.js
+            pm2 start ./configs/ecosystem.config.js
             pm2 save
 
