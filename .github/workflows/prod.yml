@@ -39,12 +39,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-     - name: Build Astro project
-       run: |
-        CONTENTFUL_SPACE_ID=${{ secrets.CONTENTFUL_SPACE_ID }} \
-        CONTENTFUL_DELIVERY_TOKEN=${{ secrets.CONTENTFUL_DELIVERY_TOKEN }} \
-        CONTENTFUL_PREVIEW_TOKEN=${{ secrets.CONTENTFUL_PREVIEW_TOKEN }} \
-        npm run build
+      - name: Build Astro project
+        run: |
+          CONTENTFUL_SPACE_ID=${{ secrets.CONTENTFUL_SPACE_ID }} \
+          CONTENTFUL_DELIVERY_TOKEN=${{ secrets.CONTENTFUL_DELIVERY_TOKEN }} \
+          CONTENTFUL_PREVIEW_TOKEN=${{ secrets.CONTENTFUL_PREVIEW_TOKEN }} \
+          npm run build
 
       - name: Set up known_hosts
         run: |
