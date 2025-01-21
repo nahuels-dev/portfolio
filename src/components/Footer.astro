@@ -1,10 +1,5 @@
 ---
 import MainContainer from "./MainContainer.astro"
-import codepen from '@/assets/images/icons/logo-codepen.svg'
-import github from '@/assets/images/icons/logo-github.svg'
-import linkedin from '@/assets/images/icons/logo-linkedin.svg'
-import mail from '@/assets/images/icons/mail.svg'
-import { Image } from 'astro:assets';
 ---
 <footer class="footer" id="contact">
   <MainContainer>
@@ -12,26 +7,26 @@ import { Image } from 'astro:assets';
 
     <ul class="footer__social">
       <li><a href="https://www.linkedin.com/in/nahuel--silva/" target="_blank">
-        <Image
-            src={linkedin}
+        <img
+            src={'/assets/images/icons/logo-linkedin.svg'}
             alt='linkedin logo'
         />
     </a></li>
     <li><a href="https://github.com/nahuels-dev" target="_blank">
-        <Image
-            src={github}
+        <img
+            src={'/assets/images/icons/logo-github.svg'}
             alt='github logo'
         />
     </a></li>
     <li><a href="mailto:nahuel.silva008@gmail.com?Subject=Tenemos%20una%20propuesta%20para%20ti&Body=Hola%20Nahuel,%20nos%20intereso%20tu%20perfil%20y%20queremos...">
-        <Image
-            src={mail}
+        <img
+            src={'/assets/images/icons/mail.svg'}
             alt='mail logo'
         />
     </a></li>
     <li><a href="https://codepen.io/nahuel_s" target="_blank">
-        <Image
-            src={codepen}
+        <img
+            src={'/assets/images/icons/logo-codepen.svg'}
             alt='codepen logo'
         />
     </a></li>
