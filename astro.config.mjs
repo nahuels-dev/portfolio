@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig, passthroughImageService } from 'astro/config';
 import node from '@astrojs/node';
+
 // https://astro.build/config
 export default defineConfig({
   output:'server',
@@ -8,7 +9,7 @@ export default defineConfig({
     mode: 'standalone',
   }),
   image: {
-    service: passthroughImageService()
+    service: undefined,
   },
   vite: {
     css: {
