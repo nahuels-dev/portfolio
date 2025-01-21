@@ -41,7 +41,10 @@ jobs:
 
       - name: Build Astro project with runtime variables
         run: |
-          npx definevars --dotenv .env astro build
+          CONTENTFUL_SPACE_ID=${{ secrets.CONTENTFUL_SPACE_ID }} \
+          CONTENTFUL_DELIVERY_TOKEN=${{ secrets.CONTENTFUL_DELIVERY_TOKEN }} \
+          CONTENTFUL_PREVIEW_TOKEN=${{ secrets.CONTENTFUL_PREVIEW_TOKEN }} \
+          npx astro build
 
       - name: Set up known_hosts
         run: |
