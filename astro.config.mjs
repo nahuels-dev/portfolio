@@ -9,7 +9,7 @@ export default defineConfig({
     mode: 'standalone',
   }),
   image: {
-    service: undefined,
+    service: passthroughImageService()
   },
   vite: {
     css: {
