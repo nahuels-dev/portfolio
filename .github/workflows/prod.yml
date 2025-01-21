@@ -81,7 +81,7 @@ jobs:
           port: 22
           key: ${{ secrets.DROPLET_KEY }}
           source: "package.json"
-          target: "${{ secrets.DROPLET_PATH }}/dist"
+          target: "${{ secrets.DROPLET_PATH }}"
 
       - name: Restart SSR with PM2
         uses: appleboy/ssh-action@v1.1.0
@@ -92,7 +92,11 @@ jobs:
           port: 22
           script: |
             cd ${{ secrets.DROPLET_PATH }}
+            nvm use 20.17.0
             npm install
             pm2 stop nahuel-s-dev || true
+            CONTENTFUL_SPACE_ID=${{ secrets.CONTENTFUL_SPACE_ID }} \
+            CONTENTFUL_DELIVERY_TOKEN=${{ secrets.CONTENTFUL_DELIVERY_TOKEN }} \
+            CONTENTFUL_PREVIEW_TOKEN=${{ secrets.CONTENTFUL_PREVIEW_TOKEN }} \
             pm2 start dist/server/entry.mjs --interpreter=/root/.nvm/v20.17.0/bin/node --name nahuel-s-dev
             pm2 save
