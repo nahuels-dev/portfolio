@@ -63,16 +63,6 @@ jobs:
           source: "dist/*"
           target: "${{ secrets.DROPLET_PATH }}"
 
-      - name: Upload .env to Droplet
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.DROPLET_IP }}
-          username: ${{ secrets.DROPLET_USER }}
-          port: 22
-          key: ${{ secrets.DROPLET_KEY }}
-          source: ".env"
-          target: "${{ secrets.DROPLET_PATH }}"
-
       - name: Upload package.json to Droplet
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -95,8 +85,6 @@ jobs:
             nvm use 20.17.0
             npm install
             pm2 stop nahuel-s-dev || true
-            CONTENTFUL_SPACE_ID=${{ secrets.CONTENTFUL_SPACE_ID }} \
-            CONTENTFUL_DELIVERY_TOKEN=${{ secrets.CONTENTFUL_DELIVERY_TOKEN }} \
-            CONTENTFUL_PREVIEW_TOKEN=${{ secrets.CONTENTFUL_PREVIEW_TOKEN }} \
-            pm2 start dist/server/entry.mjs --interpreter=/root/.nvm/v20.17.0/bin/node --name nahuel-s-dev
+            pm2 start ecosystem.config.js
             pm2 save
+
