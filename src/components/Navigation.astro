@@ -5,7 +5,21 @@ import MainContainer from "./MainContainer.astro";
 <header class="header">
   <MainContainer class="header__container">
     <div class="header__container__logo" scroll-to="#index">
-      <svg width="29" height="60" viewBox="0 0 29 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M27.5 5.62913L15.0983 27.2471L27.5 44.8182L27.5 5.62913Z" stroke="#8155FF" stroke-width="3"></path><path d="M1.5 15.62913L13.9017 37.2471L1.5 54.8182L1.5 15.62913Z" stroke="#8155FF" stroke-width="3" fill="none" /></svg>
+      <svg
+        width="29"
+        height="60"
+        viewBox="0 0 29 60"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        ><path
+          d="M27.5 5.62913L15.0983 27.2471L27.5 44.8182L27.5 5.62913Z"
+          stroke="#8155FF"
+          stroke-width="3"></path><path
+          d="M1.5 15.62913L13.9017 37.2471L1.5 54.8182L1.5 15.62913Z"
+          stroke="#8155FF"
+          stroke-width="3"
+          fill="none"></path></svg
+      >
     </div>
 
     <button class="header__container__togglebtn">
@@ -17,28 +31,56 @@ import MainContainer from "./MainContainer.astro";
 
     <nav class="header__container__nav">
       <ul class="header__container__nav__list">
-        <li class="header__container__nav__list__item" scroll-to="#works">Proyectos </li>
-        <li class="header__container__nav__list__item" scroll-to="#about">Sobre mi </li>
-        <li class="header__container__nav__list__item" scroll-to="#contact">Contacto </li>
+        <li class="header__container__nav__list__item" scroll-to="#works">
+          Proyectos
+        </li>
+        <li class="header__container__nav__list__item" scroll-to="#about">
+          Sobre mi
+        </li>
+        <li class="header__container__nav__list__item" scroll-to="#contact">
+          Contacto
+        </li>
       </ul>
     </nav>
   </MainContainer>
 </header>
 <script>
-  const toggleBtn = document.querySelector<HTMLButtonElement>(".header__container__togglebtn")
-  const nav = document.querySelector<HTMLElement>(".header__container__nav")
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+  const toggleBtn = document.querySelector<HTMLButtonElement>(".header__container__togglebtn");
+  const nav = document.querySelector<HTMLElement>(".header__container__nav");
+  const showAnim = gsap
+    .from(".header", {
+      yPercent: -150,
+      paused: true,
+      duration: 0.2,
+      scrollTrigger: {
+        start: "120px top",
+        end: 99999,
+        onUpdate: (self) => {
+          if (self.direction === -1) showAnim.play();
+          else {
+            showAnim.reverse();
+            if (toggleBtn && nav) {
+              toggleBtn.classList.remove("header__container__togglebtn__open");
+              nav.classList.remove("header__container__nav__open");
+            }
+          }
+        },
+      },
+    })
+    .progress(1);
 
   if (toggleBtn && nav) {
     toggleBtn.addEventListener("click", () => {
-      toggleBtn.classList.toggle("header__container__togglebtn__open")
-      nav.classList.toggle("header__container__nav__open")
+      toggleBtn.classList.toggle("header__container__togglebtn__open");
+      nav.classList.toggle("header__container__nav__open");
     });
   } else {
-    console.error("Toggle button or navigation element not found.")
+    console.error("Toggle button or navigation element not found.");
   }
-
-
-
 </script>
 <style lang="scss" is:global>
   .header {
@@ -58,7 +100,7 @@ import MainContainer from "./MainContainer.astro";
       align-items: center;
       flex-wrap: wrap;
 
-      &__logo{
+      &__logo {
         display: grid;
         padding: 2px 0;
       }

@@ -34,7 +34,7 @@ const handleClickString = handleClick ? String(handleClick) : "";
     </button>
   )
 }
-<script define:vars={{ handleClickString, id }} is:raw>
+<script define:vars={{ handleClickString, id }}>
   
   const button = document.querySelector(`[data-id="${id}"]`);
 
@@ -62,7 +62,6 @@ const handleClickString = handleClick ? String(handleClick) : "";
     color: $white;
     text-decoration: none;
     margin-bottom: 17px;
-    margin-left: 30px;
     &:hover {
       box-shadow: 0px -5px 0px #5d3ac0 inset;
     }
