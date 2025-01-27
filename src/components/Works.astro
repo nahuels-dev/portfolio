@@ -23,7 +23,7 @@ const itemsSorted = entries.items.sort((a, b) => a.fields.id - b.fields.id);
       <a class="works__item" href={item.fields.siteUrl} target="_blank">
         <div class="works__item__index">{item.fields.id!.toString().padStart(2, '0')}</div>
         <div class="works__item__text">
-          <h3 class="works__item__text__site">{item.fields.siteName}</h3>
+          <h2 class="works__item__text__site">{item.fields.siteName}</h2>
           <div class="works__item__text__techs">
             {(item.fields.techs as []).map((tech:string)=>
               <span>{tech}</span>
@@ -79,7 +79,6 @@ const itemsSorted = entries.items.sort((a, b) => a.fields.id - b.fields.id);
       border-bottom: 1px solid $dark-background;
       text-decoration: none;
       transition: color .4s;
-      will-change: transform;
       
       &:hover {
         color: $main-violet;
@@ -101,13 +100,13 @@ const itemsSorted = entries.items.sort((a, b) => a.fields.id - b.fields.id);
         text-align: center;
         z-index: 1;
         font-family: $jacquard-font;
-        width: 100px;
+        width: responsive-clamp(70,100);
         text-align: left;
       }
 
       &__text{
         &__site{
-          font-size: responsive-clamp(30,50);
+          font-size: responsive-clamp(23,45);
           font-weight: 700;
           text-transform: uppercase;
           font-family: $main-font;

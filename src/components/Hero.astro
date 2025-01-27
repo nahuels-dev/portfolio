@@ -7,12 +7,7 @@ import MainContainer from "./MainContainer.astro";
   <div class="hero__glow"></div>
   <MainContainer class="hero__container">
     <div class="hero__container__text">
-      <h1>
-        Desarrollo sitios y aplicaciones web adaptables y <span class="yellow"
-          >responsivas</span
-        >. Me enfoco en crear soluciones <span class="yellow">atractivas</span> y
-        <span class="yellow">fáciles de usar</span>.
-      </h1>
+      <h1>Diseño y desarrollo web <span class="yellow">innovador</span> para impulsar tu <span class="yellow">futuro digital</span></h1>
       <Button label="Sobre mi" handleClick={() => null} scrollTo="#about" />
     </div>
 
@@ -76,10 +71,10 @@ import MainContainer from "./MainContainer.astro";
       display: grid;
       align-items: center;
       &__text {
-        width: 70%;
+        width: 55%;
         & > h1 {
-          font-size: responsive-clamp(25, 30);
-          margin: 17px 0 17px 30px;
+          font-size: responsive-clamp(30, 50);
+          margin: 17px 0 17px 0;
         }
 
         @include respond-to("medium-large") {
