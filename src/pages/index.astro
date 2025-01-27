@@ -37,6 +37,24 @@ import AboutMe from "@/components/AboutMe.astro";
 		font-family: $main-font;
 	}
 
+	::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: $dark-violet;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: $main-violet;
+		border-radius: 8px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: rgba($color: $main-violet, $alpha: .8);
+	}
+
 	.container {
 		width: 95%;
 		max-width: 1200px;
