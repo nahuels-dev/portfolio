@@ -7,51 +7,121 @@ import Footer from "@/components/Footer.astro";
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Desarrollador Web Frontend en Uruguay | Nahuel Silva</title>
-		<meta name="keywords" content="desarrollador web, Astro, Angular, Vue, MongoDB, frontend, desarrollo web Uruguay, diseño responsivo, GSAP, TypeScript">
-		<link rel="canonical" href="https://nahuel-s.dev/">
-		<meta name="description" content="Soy Nahuel Silva, desarrollador web frontend especializado en tecnologías como Astro, Angular, Vue y MongoDB. Diseño soluciones web innovadoras y responsivas.">
-		<meta property="og:title" content="Desarrollador Web Frontend en Uruguay | Nahuel S">
-		<meta property="og:description" content="Soy Nahuel Silva, experto en tecnologías web como Astro, Angular y MongoDB. Diseño sitios web responsivos e innovadores.">
-		<meta property="og:type" content="website">
-		<meta property="og:url" content="https://nahuel-s.dev/">
-		<meta property="og:locale" content="es_UY">
-		<meta name="twitter:card" content="summary_large_image">
-		<meta name="twitter:title" content="Desarrollador Web Frontend en Uruguay | Nahuel S">
-		<meta name="twitter:description" content="Soy Nahuel Silva, desarrollador web con experiencia en Astro, Angular y MongoDB. Diseño soluciones web innovadoras y responsivas.">
+		<meta name="robots" content="index, follow" />
+		<meta name="theme-color" content="#8155FF" />
 
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<title>Desarrollador Web Frontend en Uruguay | Nahuel Silva</title>
+		<meta
+			name="description"
+			content="Soy Nahuel Silva, desarrollador web frontend especializado en tecnologías como Astro, Angular, Vue y MongoDB. Diseño soluciones web innovadoras y responsivas."
+		/>
+		<meta
+			name="keywords"
+			content="desarrollador web, Astro, Angular, Vue, MongoDB, frontend, desarrollo web Uruguay, diseño responsivo, GSAP, TypeScript"
+		/>
+		<link rel="canonical" href="https://nahuel-s.dev/" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://nahuel-s.dev/" />
+		<meta
+			property="og:title"
+			content="Desarrollador Web Frontend en Uruguay | Nahuel Silva"
+		/>
+		<meta
+			property="og:description"
+			content="Desarrollo web moderno con Astro, Angular y Vue. Sitios responsivos e innovadores."
+		/>
+		<meta property="og:locale" content="es_UY" />
+		<meta property="og:image" content="https://nahuel-s.dev/og-image.jpg" />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta
+			name="twitter:title"
+			content="Desarrollador Web Frontend en Uruguay | Nahuel Silva"
+		/>
+		<meta
+			name="twitter:description"
+			content="Frontend developer especializado en Astro, Angular y Vue. Diseño web innovador y responsivo."
+		/>
+		<meta name="twitter:image" content="https://nahuel-s.dev/og-image.jpg" />
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Numans&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Numans&family=Rubik:wght@300..900&display=swap"
 			rel="stylesheet"
 		/>
+
 		<script type="application/ld+json">
 			{
 				"@context": "https://schema.org",
 				"@type": "Person",
-				"name": "Nahuel S",
-				"jobTitle": "Desarrollador Web Frontend",
+				"name": "Nahuel Silva",
+				"alternateName": "Nahuel S",
 				"url": "https://nahuel-s.dev/",
+				"image": "https://nahuel-s.dev/profile.jpg",
+				"jobTitle": "Desarrollador Web Frontend",
+				"description": "Desarrollador web frontend especializado en Astro, Angular, Vue y MongoDB. Diseño soluciones web innovadoras y responsivas.",
+				"address": {
+					"@type": "PostalAddress",
+					"addressCountry": "Uruguay"
+				},
 				"sameAs": [
 					"https://www.linkedin.com/in/nahuel--silva/",
 					"https://github.com/nahuels-dev",
 					"https://codepen.io/nahuel_s"
 				],
-				"address": {
-					"@type": "PostalAddress",
-					"addressCountry": "Uruguay"
-				},
-				"worksFor": {
-					"@type": "Organization",
-					"name": "Freelance"
+				"hasOfferCatalog": {
+					"@type": "OfferCatalog",
+					"name": "Servicios de desarrollo web",
+					"itemListElement": [
+						{
+							"@type": "Offer",
+							"itemOffered": {
+								"@type": "Service",
+								"name": "Desarrollo Web Frontend",
+								"description": "Construcción de sitios web personalizados optimizados para rendimiento, SEO y experiencia de usuario."
+							}
+						},
+						{
+							"@type": "Offer",
+							"itemOffered": {
+								"@type": "Service",
+								"name": "Desarrollo de Aplicaciones Web",
+								"description": "Implementación de aplicaciones web SPA/MPA con interacción, animaciones y lógica compleja."
+							}
+						},
+						{
+							"@type": "Offer",
+							"itemOffered": {
+								"@type": "Service",
+								"name": "Integración con Backend y Bases de Datos",
+								"description": "Conexión de frontend con APIs, bases de datos como MongoDB y servicios externos."
+							}
+						},
+						{
+							"@type": "Offer",
+							"itemOffered": {
+								"@type": "Service",
+								"name": "Optimización de Rendimiento y Accesibilidad",
+								"description": "Auditorías y mejoras de velocidad, diseño responsive, animaciones suaves y accesibilidad WCAG."
+							}
+						},
+						{
+							"@type": "Offer",
+							"itemOffered": {
+								"@type": "Service",
+								"name": "Prototipado y Animaciones Interactivas",
+								"description": "Creación de prototipos visuales y animaciones personalizadas para experiencias digitales memorables."
+							}
+						}
+					]
 				}
 			}
-			</script>
+		</script>
 	</head>
 	<body>
 		<Navigation />
@@ -74,7 +144,7 @@ import Footer from "@/components/Footer.astro";
 			scrolls.forEach((item) => {
 				const target = item.getAttribute("scroll-to") as string;
 				item.addEventListener("click", () =>
-					lenis.scrollTo(target, { offset: -100,duration:5 }),
+					lenis.scrollTo(target, { offset: -100, duration: 5 }),
 				);
 			});
 		</script>
